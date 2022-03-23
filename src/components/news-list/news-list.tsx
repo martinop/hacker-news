@@ -4,20 +4,24 @@ import "./news-list.styles.css";
 
 type NewsListType = {
   news: NewArticle[];
+  lastElementRef: any;
 };
 
 function NewsList(props: NewsListType) {
-  const { news } = props;
+  const { news, lastElementRef } = props;
   return (
     <div className="news-list">
-      {news.map((n) => (
-        <Card
-          key={`new-${n.id}`}
-          {...n}
-          isFavorite={false}
-          onClick={console.log}
-        />
-      ))}
+      {news.map((n, index) => {
+        const isLast = index + 1 === news.length;
+        return (
+          <Card
+            {...n}
+            key={`new-${n.id}`}
+            isFavorite={false}
+            {...(isLast && { ref: lastElementRef })}
+          />
+        );
+      })}
     </div>
   );
 }

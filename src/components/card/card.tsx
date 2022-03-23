@@ -1,3 +1,4 @@
+import React from "react";
 import dayjs from "dayjs";
 
 import { NewArticle } from "../../types";
@@ -7,10 +8,9 @@ import "./card.styles.css";
 
 type CardProps = NewArticle & {
   isFavorite: boolean;
-  onClick: (id: string) => void;
 };
 
-function Card(props: CardProps) {
+const Card = React.forwardRef((props: CardProps, ref: any) => {
   const { title, author, storyUrl, createdAt, isFavorite } = props;
 
   function onOpen() {
@@ -18,7 +18,7 @@ function Card(props: CardProps) {
   }
 
   return (
-    <div className="card" onClick={onOpen}>
+    <div className="card" onClick={onOpen} ref={ref}>
       <div className="card-content">
         <div className="card-timeago">
           <svg
@@ -43,6 +43,6 @@ function Card(props: CardProps) {
       </div>
     </div>
   );
-}
+});
 
 export default Card;
