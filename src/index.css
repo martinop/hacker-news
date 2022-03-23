@@ -5,7 +5,8 @@
   --color-gray-100: #f5f5f5;
   --color-gray-200: #d6d6d6;
   --color-gray-500: #606060;
-  --color-black: #3b3b3b;
+  --color-black-500: #3b3b3b;
+  --color-black-700: #2e2e2e;
   --color-blue: #1797ff;
 }
 
@@ -21,4 +22,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  outline: inherit;
+  border-style: solid;
 }

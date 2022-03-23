@@ -1,10 +1,4 @@
 .tab button {
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  border-style: solid;
-
   font-family: Roboto;
   color: var(--color-gray-500);
   font-size: 16px;
