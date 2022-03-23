@@ -1,3 +1,5 @@
+import React from "react";
+import { useFavoritesContext } from "../../context/favorites";
 import { NewArticle } from "../../types";
 import Card from "../card";
 import "./news-list.styles.css";
@@ -9,6 +11,13 @@ type NewsListType = {
 
 function NewsList(props: NewsListType) {
   const { news, lastElementRef } = props;
+  const { addFavorite, removeFavorite, favorites } = useFavoritesContext();
+
+  const favoritesIds = React.useMemo(
+    () => favorites.map((e) => e.id),
+    [favorites]
+  );
+
   return (
     <div className="news-list">
       {news.map((n, index) => {
@@ -17,7 +26,10 @@ function NewsList(props: NewsListType) {
           <Card
             {...n}
             key={`new-${n.id}`}
-            isFavorite={false}
+            onToggleFavorite={(shouldRemove) =>
+              shouldRemove ? removeFavorite(n.id) : addFavorite(n)
+            }
+            isFavorite={favoritesIds.includes(n.id)}
             {...(isLast && { ref: lastElementRef })}
           />
         );

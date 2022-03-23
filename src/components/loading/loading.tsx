@@ -10,7 +10,6 @@ function Loading() {
         width="36px"
         height="36px"
         viewBox="0 0 100 100"
-        enable-background="new 0 0 0 0"
       >
         <path
           fill="black"
