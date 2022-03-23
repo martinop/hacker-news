@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import App from "./app";
+import App from "./app-main";
 import { FavoritesContextProvider } from "./context/favorites";
 
 import "./index.css";
