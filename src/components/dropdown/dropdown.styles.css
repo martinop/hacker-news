@@ -20,6 +20,8 @@
   display: flex;
   position: absolute;
   flex-direction: column;
+  background-color: white;
+  z-index: 3;
 }
 
 .dropdown-item {
@@ -27,7 +29,6 @@
   border: none;
   display: flex;
   align-items: center;
-  background-color: white;
   text-align: left;
   padding: 12px;
 }
