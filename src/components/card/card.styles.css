@@ -1,7 +1,7 @@
 .card {
   display: flex;
   border-radius: 6px;
-  border: solid 2px var(--color-gray-300);
+  border: solid 2px var(--color-gray-250);
   cursor: pointer;
   font-family: Roboto;
 }

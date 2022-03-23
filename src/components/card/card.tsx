@@ -8,14 +8,21 @@ import "./card.styles.css";
 
 type CardProps = NewArticle & {
   isFavorite: boolean;
+  onToggleFavorite: (isFavorite: boolean) => void;
 };
 
 const Card = React.forwardRef(
   (props: CardProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { title, author, storyUrl, createdAt, isFavorite } = props;
+    const { title, author, onToggleFavorite, storyUrl, createdAt, isFavorite } =
+      props;
 
     function onOpen() {
       window.open(storyUrl, "_blank");
+    }
+
+    function onPressFavorite(e: any) {
+      e.stopPropagation();
+      onToggleFavorite(isFavorite);
     }
 
     return (
@@ -40,11 +47,13 @@ const Card = React.forwardRef(
           <p className="card-title">{title}</p>
         </div>
         <div className="card-favorite">
-          {isFavorite ? <FilledHeart /> : <EmptyHeart />}
+          <button onClick={onPressFavorite}>
+            {isFavorite ? <FilledHeart /> : <EmptyHeart />}
+          </button>
         </div>
       </div>
     );
   }
 );
 
-export default Card;
+export default React.memo(Card);
