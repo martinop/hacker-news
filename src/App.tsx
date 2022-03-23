@@ -8,7 +8,7 @@ import useNewsSearch from "./hooks/useNewsSearch";
 
 function App() {
   // maybe move to context
-  const [pageNumber] = React.useState(0);
+  const [pageNumber, setPageNumber] = React.useState(0);
   const [selectedOption, setSelectedOption] = React.useState<string | null>(
     null
   );
@@ -17,14 +17,29 @@ function App() {
     pageNumber
   );
 
-  console.log({ news, hasMore, isLoading });
+  const observer = React.useRef<IntersectionObserver>();
+  const lastElementRef = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((e) => {
+        if (e[0].isIntersecting && hasMore) {
+          setPageNumber((prevPage) => prevPage + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [hasMore, isLoading]
+  );
+
   return (
     <div className="app">
       <Nav />
       <Container>
         <Tabs />
         <Dropdown value={selectedOption} onChange={setSelectedOption} />
-        <NewsList news={news} />
+        <NewsList news={news} lastElementRef={lastElementRef} />
+        {isLoading && <span>Loading...</span>}
       </Container>
     </div>
   );
