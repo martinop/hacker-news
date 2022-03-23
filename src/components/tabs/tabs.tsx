@@ -2,6 +2,11 @@ import React from "react";
 import Tab from "../tab";
 import "./tabs.styles.css";
 
+type TabsProps = {
+  active: number;
+  onChange: (tab: number) => void;
+};
+
 const tabs = [
   {
     title: "All",
@@ -13,8 +18,9 @@ const tabs = [
   },
 ];
 
-function Tabs() {
-  const [activeTab, setActiveTab] = React.useState(0);
+function Tabs(props: TabsProps) {
+  const { active, onChange } = props;
+
   return (
     <div data-testid="tabs" className="tabs">
       <ul>
@@ -22,8 +28,8 @@ function Tabs() {
           <Tab
             key={`tab-${index}`}
             title={tab.title}
-            active={activeTab === tab.value}
-            onClick={() => setActiveTab(tab.value)}
+            active={active === tab.value}
+            onClick={() => onChange(tab.value)}
           />
         ))}
       </ul>
