@@ -1,12 +1,13 @@
 import React from "react";
+import Container from "../container";
 import "./nav.styles.css";
 
 function Nav() {
   return (
     <header className="nav">
-      <div className="nav-container">
+      <Container>
         <span>HACKER NEWS</span>
-      </div>
+      </Container>
     </header>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "./components/container";
 import Dropdown from "./components/dropdown";
 import Nav from "./components/nav";
 import Tabs from "./components/tabs";
@@ -10,10 +11,10 @@ function App() {
   return (
     <div className="app">
       <Nav />
-      <Tabs />
-      <div>
+      <Container>
+        <Tabs />
         <Dropdown value={selectedOption} onChange={setSelectedOption} />
-      </div>
+      </Container>
     </div>
   );
 }
