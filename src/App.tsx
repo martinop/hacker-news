@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "./components/container";
 import Dropdown from "./components/dropdown";
+import Loading from "./components/loading";
 import Nav from "./components/nav";
 import NewsList from "./components/news-list";
 import Tabs from "./components/tabs";
@@ -39,7 +40,7 @@ function App() {
         <Tabs />
         <Dropdown value={selectedOption} onChange={setSelectedOption} />
         <NewsList news={news} lastElementRef={lastElementRef} />
-        {isLoading && <span>Loading...</span>}
+        {isLoading && <Loading />}
       </Container>
     </div>
   );
