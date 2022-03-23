@@ -46,11 +46,9 @@ const Card = React.forwardRef(
           </div>
           <p className="card-title">{title}</p>
         </div>
-        <div className="card-favorite">
-          <button onClick={onPressFavorite}>
-            {isFavorite ? <FilledHeart /> : <EmptyHeart />}
-          </button>
-        </div>
+        <button className="card-favorite" onClick={onPressFavorite}>
+          {isFavorite ? <FilledHeart /> : <EmptyHeart />}
+        </button>
       </div>
     );
   }
