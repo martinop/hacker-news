@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "./components/container";
 import Dropdown from "./components/dropdown";
+import FavoritesList from "./components/favorites-list";
 import Loading from "./components/loading";
 import Nav from "./components/nav";
 import NewsList from "./components/news-list";
@@ -9,6 +10,7 @@ import useNewsSearch from "./hooks/useNewsSearch";
 
 function App() {
   // maybe move to context
+  const [activeTab, setActiveTab] = React.useState(0);
   const [pageNumber, setPageNumber] = React.useState(0);
   const [selectedOption, setSelectedOption] = React.useState<string | null>(
     null
@@ -32,14 +34,23 @@ function App() {
     },
     [hasMore, isLoading]
   );
+  const isFavoriteTabActive = activeTab === 1;
 
   return (
     <div className="app">
       <Nav />
       <Container>
-        <Tabs />
-        <Dropdown value={selectedOption} onChange={setSelectedOption} />
-        <NewsList news={news} lastElementRef={lastElementRef} />
+        <Tabs active={activeTab} onChange={setActiveTab} />
+        {!isFavoriteTabActive && (
+          <Dropdown value={selectedOption} onChange={setSelectedOption} />
+        )}
+
+        {isFavoriteTabActive ? (
+          <FavoritesList />
+        ) : (
+          <NewsList news={news} lastElementRef={lastElementRef} />
+        )}
+
         {isLoading && <Loading />}
       </Container>
     </div>
