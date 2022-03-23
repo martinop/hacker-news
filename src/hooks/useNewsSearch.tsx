@@ -1,12 +1,6 @@
 import React from "react";
 import { API_URL } from "../constants";
-
-type NewArticle = {
-  story_url: string;
-  created_at: string;
-  title: string;
-  author: string;
-};
+import { NewArticle } from "../types";
 
 type State = {
   isLoading: boolean;
@@ -43,10 +37,11 @@ function useNewsSearch(query: string | null, pageNumber: number): State {
         for (let n of res?.hits) {
           if (n.story_url && n.created_at && n.story_title && n.author) {
             newNews.push({
-              story_url: n.story_url,
-              created_at: n.created_at,
+              storyUrl: n.story_url,
+              createdAt: n.created_at,
               title: n.story_title,
               author: n.author,
+              id: n.objectID,
             });
           }
         }
