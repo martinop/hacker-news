@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp } from "./icon";
 import OPTIONS from "./options";
 
 import "./dropdown.styles.css";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 type DropdownProps = {
   value: string | null;
@@ -12,6 +13,9 @@ type DropdownProps = {
 function Dropdown(props: DropdownProps) {
   const { value, onChange } = props;
   const [isOpen, setIsOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(dropdownRef, () => setIsOpen(false));
 
   function _onChange(newValue: string) {
     setIsOpen(false);
@@ -19,7 +23,7 @@ function Dropdown(props: DropdownProps) {
   }
 
   return (
-    <div className="dropdown">
+    <div className="dropdown" ref={dropdownRef}>
       <button
         className="dropdown-trigger"
         onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
@@ -28,7 +32,7 @@ function Dropdown(props: DropdownProps) {
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
       {isOpen && (
-        <div className="dropdown-list">
+        <div className="dropdown-list" onBlur={console.log}>
           {OPTIONS.map((option, index) => (
             <button
               className="dropdown-item"
