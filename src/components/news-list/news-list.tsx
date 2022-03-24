@@ -19,7 +19,7 @@ function NewsList(props: NewsListType) {
   );
 
   return (
-    <div className="news-list">
+    <div className="news-list" data-testid="news-list">
       {news.map((n, index) => {
         const isLast = index + 1 === news.length;
         return (
