@@ -1,4 +1,4 @@
-import { FAVORITES_STORAGE_KEY } from "../constants";
+import { FAVORITES_STORAGE_KEY, FILTER_STORAGE_KEY } from "../constants";
 import { NewArticle } from "../types";
 
 export function storeFavorites(news: NewArticle[]) {
@@ -12,4 +12,17 @@ export function getFavorites(): NewArticle[] {
   } catch (e) {
     return [];
   }
+}
+
+export function getFilter(): string {
+  const filter = localStorage.getItem(FILTER_STORAGE_KEY);
+  try {
+    return filter || "";
+  } catch (e) {
+    return "";
+  }
+}
+
+export function storeFilter(value: string) {
+  localStorage.setItem(FILTER_STORAGE_KEY, value);
 }
