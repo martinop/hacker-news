@@ -7,9 +7,9 @@ function FavoritesList() {
   const { removeFavorite, favorites } = useFavoritesContext();
 
   return (
-    <div className="favorites-list">
+    <div>
       {favorites.length === 0 && <span>You don't have favorites yet</span>}
-      <div data-testid="favorites-list">
+      <div className="favorites-list" data-testid="favorites-list">
         {favorites.map((n, index) => {
           return (
             <Card

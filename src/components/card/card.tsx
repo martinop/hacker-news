@@ -15,7 +15,7 @@ type CardProps = NewArticle & {
 };
 
 const Card = React.forwardRef(
-  (props: CardProps, ref: ForwardedRef<HTMLAnchorElement>) => {
+  (props: CardProps, ref: ForwardedRef<HTMLDivElement>) => {
     const { title, author, onToggleFavorite, storyUrl, createdAt, isFavorite } =
       props;
 
@@ -25,11 +25,10 @@ const Card = React.forwardRef(
     }
 
     return (
-      <a
+      <div
+        role="link"
         className="card"
-        href={storyUrl}
-        target="_blank"
-        rel="noreferrer"
+        onClick={() => window.open(storyUrl, "_blank")}
         {...(ref !== null && { ref })}
       >
         <div className="card-content">
@@ -58,7 +57,7 @@ const Card = React.forwardRef(
         >
           {isFavorite ? <FilledHeart /> : <EmptyHeart />}
         </button>
-      </a>
+      </div>
     );
   }
 );
