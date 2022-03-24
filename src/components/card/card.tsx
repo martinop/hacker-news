@@ -19,7 +19,7 @@ const Card = React.forwardRef(
     const { title, author, onToggleFavorite, storyUrl, createdAt, isFavorite } =
       props;
 
-    function onPressFavorite(e: any) {
+    function onClickFavorite(e: React.MouseEvent<HTMLButtonElement>) {
       e.stopPropagation();
       onToggleFavorite(isFavorite);
     }
@@ -53,7 +53,7 @@ const Card = React.forwardRef(
         <button
           data-testid="favorite-section"
           className="card-favorite"
-          onClick={onPressFavorite}
+          onClick={onClickFavorite}
         >
           {isFavorite ? <FilledHeart /> : <EmptyHeart />}
         </button>
