@@ -1,10 +1,13 @@
 import React, { ForwardedRef } from "react";
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 import { NewArticle } from "../../types";
 import { EmptyHeart, FilledHeart } from "./icons";
 
 import "./card.styles.css";
+
+dayjs.extend(relativeTime);
 
 type CardProps = NewArticle & {
   isFavorite: boolean;
@@ -12,13 +15,9 @@ type CardProps = NewArticle & {
 };
 
 const Card = React.forwardRef(
-  (props: CardProps, ref: ForwardedRef<HTMLDivElement>) => {
+  (props: CardProps, ref: ForwardedRef<HTMLAnchorElement>) => {
     const { title, author, onToggleFavorite, storyUrl, createdAt, isFavorite } =
       props;
-
-    function onOpen() {
-      window.open(storyUrl, "_blank");
-    }
 
     function onPressFavorite(e: any) {
       e.stopPropagation();
@@ -26,7 +25,13 @@ const Card = React.forwardRef(
     }
 
     return (
-      <div className="card" onClick={onOpen} {...(ref !== null && { ref })}>
+      <a
+        className="card"
+        href={storyUrl}
+        target="_blank"
+        rel="noreferrer"
+        {...(ref !== null && { ref })}
+      >
         <div className="card-content">
           <div className="card-timeago">
             <svg
@@ -46,10 +51,14 @@ const Card = React.forwardRef(
           </div>
           <p className="card-title">{title}</p>
         </div>
-        <button className="card-favorite" onClick={onPressFavorite}>
+        <button
+          data-testid="favorite-section"
+          className="card-favorite"
+          onClick={onPressFavorite}
+        >
           {isFavorite ? <FilledHeart /> : <EmptyHeart />}
         </button>
-      </div>
+      </a>
     );
   }
 );
