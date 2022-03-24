@@ -25,7 +25,7 @@ jest.mock("../../context/favorites", () => {
 });
 describe("<NewsList />", () => {
   it("should render empty div", async () => {
-    render(<NewsList news={[]} lastElementRef={null} />);
+    render(<NewsList news={[]} lastElementRef={jest.fn} />);
     const list = screen.getByTestId("news-list");
     expect(list).toBeEmptyDOMElement();
   });
