@@ -23,7 +23,7 @@ describe("<FavoritesList />", () => {
     const text = screen.getByText(/you don't have favorites yet/i);
     expect(text).toBeInTheDocument();
   });
-  it("should render favorite items", async () => {
+  it("should render favorite items", () => {
     mockFavorites = [
       {
         title: "Test",
@@ -38,7 +38,7 @@ describe("<FavoritesList />", () => {
     expect(list).not.toBeEmptyDOMElement();
   });
 
-  it("should call removeFavorite", async () => {
+  it("should call removeFavorite", () => {
     render(<FavoritesList />);
     const element = screen.getByTestId("favorite-section");
 

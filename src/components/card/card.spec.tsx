@@ -10,14 +10,14 @@ const baseProps = {
   storyUrl: "https://www.happinessofbeing.com/happiness_art_being",
 };
 describe("<Card />", () => {
-  it("should render card text", async () => {
+  it("should render card text", () => {
     render(
       <Card {...baseProps} isFavorite={false} onToggleFavorite={jest.fn} />
     );
-    const author = await screen.findByText(/thursday24/gi);
+    const author = screen.getByText(/thursday24/i);
     expect(author).toBeInTheDocument();
 
-    const title = await screen.findByText(/test/gi);
+    const title = screen.getByText(/test/i);
     expect(title).toBeInTheDocument();
   });
 
@@ -54,21 +54,21 @@ describe("<Card />", () => {
     expect(element).toHaveAttribute("href", "https://www.google.com");
   });
 
-  it("should render filled heart", async () => {
+  it("should render filled heart", () => {
     render(<Card {...baseProps} isFavorite onToggleFavorite={jest.fn} />);
-    const filledHeartIcon = await screen.findByTestId("filled-heart");
+    const filledHeartIcon = screen.getByTestId("filled-heart");
     expect(filledHeartIcon).toBeInTheDocument();
   });
 
-  it("should render empty heart", async () => {
+  it("should render empty heart", () => {
     render(
       <Card {...baseProps} isFavorite={false} onToggleFavorite={jest.fn} />
     );
-    const emptyHeartIcon = await screen.findByTestId("empty-heart");
+    const emptyHeartIcon = screen.getByTestId("empty-heart");
     expect(emptyHeartIcon).toBeInTheDocument();
   });
 
-  it("should filled heart not be in document", async () => {
+  it("should filled heart not be in document", () => {
     render(
       <Card {...baseProps} isFavorite={false} onToggleFavorite={jest.fn} />
     );
@@ -76,7 +76,7 @@ describe("<Card />", () => {
     expect(filledHeartIcon).toBeNull();
   });
 
-  it("should render with ref", async () => {
+  it("should render with ref", () => {
     const ref = jest.fn();
     render(
       <Card
