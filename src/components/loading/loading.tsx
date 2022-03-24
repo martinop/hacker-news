@@ -9,6 +9,7 @@ function Loading() {
         xmlns="http://www.w3.org/2000/svg"
         width="36px"
         height="36px"
+        data-testid="loading-icon"
         viewBox="0 0 100 100"
       >
         <path
