@@ -33,7 +33,8 @@
   padding: 12px;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,
+.dropdown-item.active {
   background-color: var(--color-gray-50);
 }
 

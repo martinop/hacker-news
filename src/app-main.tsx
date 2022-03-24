@@ -7,14 +7,17 @@ import Nav from "./components/nav";
 import NewsList from "./components/news-list";
 import Tabs from "./components/tabs";
 import useNewsSearch from "./hooks/useNewsSearch";
+import { getFilter, storeFilter } from "./utils/storage";
+
+const initialFilter = getFilter() || "react";
 
 function App() {
   // maybe move to context
   const [activeTab, setActiveTab] = React.useState(0);
   const [pageNumber, setPageNumber] = React.useState(0);
-  const [selectedOption, setSelectedOption] = React.useState<string | null>(
-    null
-  );
+  const [selectedOption, setSelectedOption] =
+    React.useState<string>(initialFilter);
+
   const { news, hasMore, isLoading } = useNewsSearch(
     selectedOption,
     pageNumber
@@ -36,13 +39,18 @@ function App() {
   );
   const isFavoriteTabActive = activeTab === 1;
 
+  function onChangeDropdown(newValue: string) {
+    storeFilter(newValue);
+    setSelectedOption(newValue);
+  }
+
   return (
     <div className="app">
       <Nav />
       <Container>
         <Tabs active={activeTab} onChange={setActiveTab} />
         {!isFavoriteTabActive && (
-          <Dropdown value={selectedOption} onChange={setSelectedOption} />
+          <Dropdown value={selectedOption} onChange={onChangeDropdown} />
         )}
 
         {isFavoriteTabActive ? (
