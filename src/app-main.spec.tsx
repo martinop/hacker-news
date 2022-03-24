@@ -3,6 +3,16 @@ import App from "./app-main";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 describe("<App />", () => {
+  beforeEach(() => {
+    const mockIntersectionObserver = jest.fn();
+    mockIntersectionObserver.mockReturnValue({
+      observe: () => null,
+      unobserve: () => null,
+      disconnect: () => null,
+    });
+    window.IntersectionObserver = mockIntersectionObserver;
+  });
+
   it("should render", async () => {
     render(<App />);
     expect(screen.getByTestId("app")).toBeInTheDocument();
