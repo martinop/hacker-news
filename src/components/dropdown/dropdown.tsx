@@ -1,9 +1,11 @@
 import React from "react";
+import cx from "classnames";
 import { ChevronDown, ChevronUp } from "./icon";
 import OPTIONS from "./options";
 
-import "./dropdown.styles.css";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+
+import "./dropdown.styles.css";
 
 type DropdownProps = {
   value: string | null;
@@ -35,7 +37,9 @@ function Dropdown(props: DropdownProps) {
         <div className="dropdown-list" onBlur={console.log}>
           {OPTIONS.map((option, index) => (
             <button
-              className="dropdown-item"
+              className={cx("dropdown-item", {
+                active: option.value === value,
+              })}
               key={`dropdown-item-${index}`}
               onClick={() => _onChange(option.value)}
             >
