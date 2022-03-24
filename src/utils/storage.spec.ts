@@ -5,7 +5,29 @@ import {
   storeFilter,
 } from "./storage";
 
+const localStorageMock = (() => {
+  let store: { [key: string]: string } = {};
+
+  return {
+    getItem: (key: string) => {
+      return store[key] || null;
+    },
+    setItem: function (key: string, value: string) {
+      store[key] = value.toString();
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+});
+
 describe("storage", () => {
+  beforeAll(() => {
+    Object.defineProperty(window, "localStorage", {
+      value: localStorageMock,
+    });
+  });
   it("should call store favorites", async () => {
     const news = [
       {
