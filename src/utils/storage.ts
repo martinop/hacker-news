@@ -16,11 +16,7 @@ export function getFavorites(): NewArticle[] {
 
 export function getFilter(): string {
   const filter = localStorage.getItem(FILTER_STORAGE_KEY);
-  try {
-    return filter || "";
-  } catch (e) {
-    return "";
-  }
+  return filter || "";
 }
 
 export function storeFilter(value: string) {
