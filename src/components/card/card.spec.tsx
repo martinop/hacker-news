@@ -38,22 +38,6 @@ describe("<Card />", () => {
     expect(mockedOnClick).toHaveBeenCalledTimes(1);
   });
 
-  it("should have href", () => {
-    const mockedOnClick = jest.fn();
-
-    render(
-      <Card
-        {...baseProps}
-        storyUrl="https://www.google.com"
-        isFavorite={false}
-        onToggleFavorite={mockedOnClick}
-      />
-    );
-    const element = screen.getByRole("link");
-
-    expect(element).toHaveAttribute("href", "https://www.google.com");
-  });
-
   it("should render filled heart", () => {
     render(<Card {...baseProps} isFavorite onToggleFavorite={jest.fn} />);
     const filledHeartIcon = screen.getByTestId("filled-heart");

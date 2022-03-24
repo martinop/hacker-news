@@ -4,6 +4,8 @@
   border: solid 2px var(--color-gray-250);
   cursor: pointer;
   font-family: Roboto;
+  text-decoration: none;
+  text-align: left;
 }
 
 .card:hover {
