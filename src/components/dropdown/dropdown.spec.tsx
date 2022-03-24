@@ -33,4 +33,22 @@ describe("<Dropdown />", () => {
 
     expect(mockedOnClick).toHaveBeenCalledTimes(1);
   });
+  it("should close on click outside", async () => {
+    render(
+      <div>
+        <Dropdown value="" onChange={jest.fn} />
+        <div data-testid="test" />
+      </div>
+    );
+
+    const placeholder = screen.getByText(/select your news/gi);
+
+    fireEvent.click(placeholder);
+
+    expect(screen.getByTestId("dropdown-list")).toBeInTheDocument();
+
+    fireEvent.mouseDown(screen.getByTestId("test"));
+
+    expect(screen.queryByTestId("dropdown-list")).not.toBeInTheDocument();
+  });
 });
