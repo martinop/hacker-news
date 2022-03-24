@@ -6,7 +6,7 @@ import "./news-list.styles.css";
 
 type NewsListType = {
   news: NewArticle[];
-  lastElementRef: any;
+  lastElementRef: (node: HTMLDivElement | null) => void;
 };
 
 function NewsList(props: NewsListType) {
