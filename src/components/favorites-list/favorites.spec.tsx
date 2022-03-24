@@ -1,15 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import FavoritesList from "./favorites-list";
 
 import { NewArticle } from "../../types";
 
 let mockFavorites: NewArticle[] = [];
+let mockRemoveFavorite = jest.fn();
 
 jest.mock("../../context/favorites", () => {
   return {
     useFavoritesContext: () => {
       return {
-        removeFavorite: jest.fn,
+        removeFavorite: mockRemoveFavorite,
         favorites: mockFavorites,
       };
     },
@@ -35,5 +36,14 @@ describe("<FavoritesList />", () => {
     render(<FavoritesList />);
     const list = screen.getByTestId("favorites-list");
     expect(list).not.toBeEmptyDOMElement();
+  });
+
+  it("should call removeFavorite", async () => {
+    render(<FavoritesList />);
+    const element = screen.getByTestId("favorite-section");
+
+    fireEvent.click(element);
+
+    expect(mockRemoveFavorite).toHaveBeenCalledTimes(1);
   });
 });
