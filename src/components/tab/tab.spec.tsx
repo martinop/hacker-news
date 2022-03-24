@@ -15,7 +15,7 @@ describe("<Tab />", () => {
     expect(element).toHaveClass("active");
   });
 
-  it("should call on click class", () => {
+  it("should call on click", () => {
     const mockedOnClick = jest.fn();
 
     render(<Tab title="Test" onClick={mockedOnClick} active={false} />);
