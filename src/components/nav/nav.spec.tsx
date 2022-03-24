@@ -4,9 +4,9 @@ import Nav from "./nav";
 import { render, screen } from "@testing-library/react";
 
 describe("<Nav />", () => {
-  it("should render nav", async () => {
+  it("should render nav", () => {
     render(<Nav />);
-    const title = await screen.findByText(/hacker news/gi);
+    const title = screen.getByText(/hacker news/gi);
     expect(title).toBeInTheDocument();
   });
 });

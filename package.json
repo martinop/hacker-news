@@ -5,6 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.26",
@@ -40,5 +41,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!src/constants.ts",
+      "!src/index.tsx"
+    ]
+  },
+  "devDependencies": {
+    "fetch-mock-jest": "^1.5.1",
+    "node-fetch": "^2.6.7",
+    "@types/node-fetch": "^2.6.1"
   }
 }

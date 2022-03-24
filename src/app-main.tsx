@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app" data-testid="app">
       <Nav />
       <Container>
         <Tabs active={activeTab} onChange={setActiveTab} />

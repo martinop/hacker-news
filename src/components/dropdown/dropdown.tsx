@@ -30,16 +30,17 @@ function Dropdown(props: DropdownProps) {
         className="dropdown-trigger"
         onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
       >
-        <span> {value || "Select your news"}</span>
+        <span data-testid="dropdown-value"> {value || "Select your news"}</span>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
       {isOpen && (
-        <div className="dropdown-list" onBlur={console.log}>
+        <div className="dropdown-list" data-testid="dropdown-list">
           {OPTIONS.map((option, index) => (
             <button
               className={cx("dropdown-item", {
                 active: option.value === value,
               })}
+              data-testid="dropdown-item"
               key={`dropdown-item-${index}`}
               onClick={() => _onChange(option.value)}
             >
