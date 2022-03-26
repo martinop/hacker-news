@@ -7,6 +7,7 @@ import Nav from "./components/nav";
 import NewsList from "./components/news-list";
 import Tabs from "./components/tabs";
 import useNewsSearch from "./hooks/useNewsSearch";
+import handleIntersectionElement from "./utils/intersection-observer";
 import { getFilter, storeFilter } from "./utils/storage";
 
 const initialFilter = getFilter() || "react";
@@ -25,16 +26,14 @@ function App() {
 
   const observer = React.useRef<IntersectionObserver>();
   const lastElementRef = React.useCallback(
-    (node: HTMLDivElement | null) => {
-      if (isLoading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((e) => {
-        if (e[0].isIntersecting && hasMore) {
-          setPageNumber((prevPage) => prevPage + 1);
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
+    (node: HTMLDivElement | null) =>
+      handleIntersectionElement({
+        isLoading,
+        hasMore,
+        observer,
+        node,
+        onIntersect: () => setPageNumber((prevPage) => prevPage + 1),
+      }),
     [hasMore, isLoading]
   );
   const isFavoriteTabActive = activeTab === 1;

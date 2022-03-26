@@ -52,8 +52,10 @@ function useNewsSearch(query: string | null, pageNumber: number): State {
           hasMore: pageNumber < res.nbPages,
         }));
       } catch (e) {
-        console.log(e);
-        // handle error
+        setState((prevState) => ({
+          ...prevState,
+          isLoading: false,
+        }));
       }
     }
     fetchData();

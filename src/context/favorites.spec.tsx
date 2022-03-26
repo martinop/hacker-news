@@ -17,10 +17,6 @@ describe("<FavoritesContextProvider />", () => {
     );
     expect(screen.getByTestId("test-children")).toBeInTheDocument();
   });
-  it("should call removeFavorite", () => {
-    const { result } = renderHook(() => useFavoritesContext());
-    expect(result.current.addFavorite).toBeDefined();
-  });
 
   it("should add to favorite", () => {
     const { result } = renderHook(() => useFavoritesContext(), { wrapper });
@@ -58,5 +54,13 @@ describe("<FavoritesContextProvider />", () => {
     });
 
     expect(result.current.favorites).toHaveLength(0);
+  });
+
+  it("should throw error if no provider", () => {
+    const { result } = renderHook(() => useFavoritesContext(), {
+      wrapper: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    });
+
+    expect(result.error).toBeTruthy();
   });
 });

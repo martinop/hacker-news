@@ -12,11 +12,9 @@ type Props = {
   children: React.ReactNode;
 };
 
-const FavoritesContext = React.createContext<ContextState>({
-  favorites: [],
-  addFavorite: () => {},
-  removeFavorite: () => {},
-});
+const FavoritesContext = React.createContext<ContextState | undefined>(
+  undefined
+);
 
 export function FavoritesContextProvider(props: Props) {
   const { children } = props;
@@ -59,5 +57,10 @@ export function FavoritesContextProvider(props: Props) {
 
 export const useFavoritesContext = () => {
   const context = React.useContext(FavoritesContext);
+
+  if (!context)
+    throw new Error(
+      "No FavoritesContextProvider found when calling useFavoritesContext."
+    );
   return context;
 };
