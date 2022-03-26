@@ -1,6 +1,7 @@
 import App from "./app-main";
 
 import { fireEvent, render, screen } from "@testing-library/react";
+import { FavoritesContextProvider } from "./context/favorites";
 
 describe("<App />", () => {
   beforeEach(() => {
@@ -14,12 +15,20 @@ describe("<App />", () => {
   });
 
   it("should render", async () => {
-    render(<App />);
+    render(
+      <FavoritesContextProvider>
+        <App />
+      </FavoritesContextProvider>
+    );
     expect(screen.getByTestId("app")).toBeInTheDocument();
   });
 
   it("should change dropdown value", async () => {
-    render(<App />);
+    render(
+      <FavoritesContextProvider>
+        <App />
+      </FavoritesContextProvider>
+    );
 
     const dropdownValue = screen.getByText(/react/i); // initial value or could use dropdown-value test id
 
@@ -32,7 +41,11 @@ describe("<App />", () => {
   });
 
   it("should change tab to my faves on click tab", async () => {
-    render(<App />);
+    render(
+      <FavoritesContextProvider>
+        <App />
+      </FavoritesContextProvider>
+    );
 
     const element = screen.getByText(/my faves/gi);
     fireEvent.click(element);
