@@ -20,4 +20,14 @@ describe("useOnClickOutside hook", () => {
 
     expect(mockedOnTrigger).toBeCalledTimes(1);
   });
+  it("should not call trigger on click inside", async () => {
+    const mockedOnTrigger = jest.fn();
+    const ref = React.createRef<HTMLDivElement>();
+
+    render(<div ref={ref} data-testid="test" />);
+    renderHook(() => useOnClickOutside(ref, mockedOnTrigger));
+    fireEvent.mouseDown(screen.getByTestId("test"));
+
+    expect(mockedOnTrigger).toBeCalledTimes(0);
+  });
 });
